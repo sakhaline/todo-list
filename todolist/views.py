@@ -22,8 +22,8 @@ class TaskListView(generic.ListView):
 
 
 class TaskUpdateView(generic.UpdateView):
-    model = Task
-    fields = "__all__"
+    form_class = TaskForm
+    queryset = Task.objects.prefetch_related("tags")
     template_name = "todolist/task_form.html"
     success_url = reverse_lazy("todolist:task-list")
 
