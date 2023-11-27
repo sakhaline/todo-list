@@ -5,7 +5,7 @@ class Tag(models.Model):
     name = models.CharField(max_length=55)
 
     def __str__(self) -> str:
-        return self.name
+        return f"#{self.name}"
 
 
 class Task(models.Model):
@@ -20,4 +20,3 @@ class Task(models.Model):
 
     def __str__(self) -> str:
         return self.content
-
