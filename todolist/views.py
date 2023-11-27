@@ -6,19 +6,16 @@ from todolist.models import Task, Tag
 from todolist.forms import TaskForm
 
 
-
+class TaskListView(generic.ListView):
+    model = Task
+    fields = "__all__"
+    queryset = Task.objects.prefetch_related("tags")
 
 
 class TaskCreateView(generic.CreateView):
     form_class = TaskForm
     template_name = "todolist/task_form.html"
     success_url = reverse_lazy("todolist:task-list")
-
-
-class TaskListView(generic.ListView):
-    model = Task
-    fields = "__all__"
-    queryset = Task.objects.prefetch_related("tags")
 
 
 class TaskUpdateView(generic.UpdateView):

@@ -8,17 +8,18 @@
             integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
             crossorigin="anonymous">
 </head>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-2" style="padding-top: 20px">
-            {% block sidebar %}
-                {% include "includes/sidebar.html" %}
-            {% endblock %}
-        </div>
-        <div class="col-sm-10 ">
-            {% block content %}{% endblock %}
-        </div>
-    </div>
-</div>
+<body>
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-sm-2" style="padding-top: 20px">
+              {% block sidebar %}
+                  {% include "includes/sidebar.html" %}
+              {% endblock %}
+          </div>
+          <div class="col-sm-10 ">
+              {% block content %}{% endblock %}
+          </div>
+      </div>
+  </div>
 </body>
 </html>
