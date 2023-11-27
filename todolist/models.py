@@ -5,7 +5,7 @@ class Tag(models.Model):
     name = models.CharField(max_length=55)
 
     def __str__(self) -> str:
-        return f"#{self.name}"
+        return self.name
 
 
 class Task(models.Model):
@@ -16,7 +16,7 @@ class Task(models.Model):
     tags = models.ManyToManyField(Tag, related_name="tasks")
 
     class Meta:
-        ordering = ("status",)
+        ordering = ("status", "created_at")
 
     def __str__(self) -> str:
         return self.content
