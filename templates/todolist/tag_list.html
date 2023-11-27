@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
   <h1>Tags</h1>
-  <a href="#" style="float: right" class="btn btn-primary">Add</a>
+  <a href="{% url 'todolist:tag-create' %}" style="float: right" class="btn btn-primary">Add</a>
   {% if tag_list %}
     <table>
     <tr>
