@@ -14,6 +14,11 @@
         Tags: {{ task.tags.all|join:", " }}
         <a href="{% url 'todolist:task-update' pk=task.id %}">Update</a>
         <a href="{% url 'todolist:task-delete' pk=task.id %}">Delete</a>
+          {% if task.status %}
+            <a href="{% url 'todolist:task-status-update' pk=task.id %}" style="float: right" class="btn btn-secondary">Undo</a>
+          {% else %}
+            <a href="{% url 'todolist:task-status-update' pk=task.id %}" style="float: right" class="btn btn-success">Complete</a>
+          {% endif %}
       </li>
     <br>
   {% endfor %}
