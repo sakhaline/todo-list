@@ -30,6 +30,13 @@ class TaskUpdateView(generic.UpdateView):
     success_url = reverse_lazy("todolist:task-list")
 
 
+class TaskDeleteView(generic.DeleteView):
+    model = Task
+    fields = "__all__"
+    template_name = "todolist/task_confirm_delete.html"
+    success_url = reverse_lazy("todolist:task-list")
+
+
 class TagCreateView(generic.CreateView):
     model = Tag
     fields = "__all__"

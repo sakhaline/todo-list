@@ -13,7 +13,7 @@
       <li>
         Tags: {{ task.tags.all|join:", " }}
         <a href="{% url 'todolist:task-update' pk=task.id %}">Update</a>
-        <a href="#">Delete</a>
+        <a href="{% url 'todolist:task-delete' pk=task.id %}">Delete</a>
       </li>
     <br>
   {% endfor %}
