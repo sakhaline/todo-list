@@ -1,29 +1,63 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>TODO list</h1>
-  <a href="{% url 'todolist:task-create' %}" style="float: right" class="btn btn-primary">Add task</a>
-  <ul>
-  {% if task_list %}
+  <h1 style="padding-top: 20px">
+    TODO list
+    <a href="{% url 'todolist:task-create' %}" style="float: right" class="btn btn-primary">
+      Add task
+    </a>
+  </h1>
+{% if task_list %}
   {% for task in task_list %}
-      <li>{{ task.content }}{% if task.status %} Done{% else %} Not done{% endif %}</li>
-      <li>
-        Created: {{ task.created_at }}
-        Deadline: {% if task.deadline %} {{ task.deadline }} {% endif %}
+      <li class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">
+              <b>{{ task.content }}
+                {% if task.status %}
+                  <span style="color: green;">Done</span>
+                {% else %} <span style="color: red;">Not done</span>
+                {% endif %}
+              </b>
+            </h5>
+              <p class="card-text" style="color:#666666">
+                Created: {{ task.created_at }}
+                Deadline: {% if task.deadline %} {{ task.deadline }} {% endif %}
+              </p>
+              <p class="card-text" style="color:#999999">
+                Tags: {{ task.tags.all|join:", " }}
+                <a href="{% url 'todolist:task-update' pk=task.id %}">Update</a>
+                <a href="{% url 'todolist:task-delete' pk=task.id %}">Delete</a>
+                {% if task.status %}
+                  <a href="{% url 'todolist:task-status-update' pk=task.id %}" class="btn btn-outline-secondary btn-sm float-right">Undo</a>
+                {% else %}
+                  <a href="{% url 'todolist:task-status-update' pk=task.id %}" class="btn btn-outline-success btn-sm float-right">Complete</a>
+                {% endif %}
+              </p>
+          </div>
       </li>
-      <li>
-        Tags: {{ task.tags.all|join:", " }}
-        <a href="{% url 'todolist:task-update' pk=task.id %}">Update</a>
-        <a href="{% url 'todolist:task-delete' pk=task.id %}">Delete</a>
-          {% if task.status %}
-            <a href="{% url 'todolist:task-status-update' pk=task.id %}" style="float: right" class="btn btn-secondary">Undo</a>
-          {% else %}
-            <a href="{% url 'todolist:task-status-update' pk=task.id %}" style="float: right" class="btn btn-success">Complete</a>
-          {% endif %}
-      </li>
-    <br>
   {% endfor %}
-  </ul>
-  {% else %}
-    <h1>You have no tasks!</h1>
-  {% endif %}
+{% endif %}
+{#  <ul>#}
+{#  {% if task_list %}#}
+{#  {% for task in task_list %}#}
+{#      <li>{{ task.content }}{% if task.status %} Done{% else %} Not done{% endif %}</li>#}
+{#      <li>#}
+{#        Created: {{ task.created_at }}#}
+{#        Deadline: {% if task.deadline %} {{ task.deadline }} {% endif %}#}
+{#      </li>#}
+{#      <li>#}
+{#        Tags: {{ task.tags.all|join:", " }}#}
+{#        <a href="{% url 'todolist:task-update' pk=task.id %}">Update</a>#}
+{#        <a href="{% url 'todolist:task-delete' pk=task.id %}">Delete</a>#}
+{#          {% if task.status %}#}
+{#            <a href="{% url 'todolist:task-status-update' pk=task.id %}" style="float: right" class="btn btn-secondary">Undo</a>#}
+{#          {% else %}#}
+{#            <a href="{% url 'todolist:task-status-update' pk=task.id %}" style="float: right" class="btn btn-success">Complete</a>#}
+{#          {% endif %}#}
+{#      </li>#}
+{#    <br>#}
+{#  {% endfor %}#}
+{#  </ul>#}
+{#  {% else %}#}
+{#    <h1>You have no tasks!</h1>#}
+{#  {% endif %}#}
 {% endblock %}
