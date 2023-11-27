@@ -9,7 +9,6 @@ class TaskListView(generic.ListView):
     model = Task
     fields = "__all__"
     queryset = Task.objects.prefetch_related("tags")
-    print(queryset)
 
 
 class TagListView(generic.ListView):
@@ -46,4 +45,11 @@ class TagCreateView(generic.CreateView):
 class TagUpdateView(generic.UpdateView):
     model = Tag
     fields = "__all__"
+    success_url = reverse_lazy("todolist:tag-list")
+
+
+class TagDeleteView(generic.DeleteView):
+    model = Tag
+    fields = "__all__"
+    template_name = "todolist/tag_confirm_delete.html"
     success_url = reverse_lazy("todolist:tag-list")
